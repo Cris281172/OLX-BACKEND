@@ -1,0 +1,17 @@
+OLX
+
+1. Logowanie, rejestracja, przypomnienie hasła, wylogowoanie
+
+2. Lista ogłoszeń
+
+3. Podstrona pojedyńczego ogłoszenia
+
+4. Dodawanie, edycja, usuwanie ogłoszeń
+
+5. Panel administracyjny
+5.1 Zarządzenie użytkownikami
+5.2 Zarządzenie ogłoszeniami
+
+6. Konwersacja
+
+7. Wysyłka maili
