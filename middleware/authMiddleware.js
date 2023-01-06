@@ -1,6 +1,6 @@
 const jwt = require('jsonwebtoken');
 const verifyToken = async (req, res, next) => {
-    const token = req.body.toekn || req.query.token;
+    const token = req.body.token || req.query.token;
 
     if(!token){
         return res.status(403).send('This operation need auth');

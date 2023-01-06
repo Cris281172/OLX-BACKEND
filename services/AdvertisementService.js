@@ -1,7 +1,7 @@
 const Advertisement = require('../models/Advertisement');
 
 module.exports = class AdvertisementService{
-    static async addAdvertisement({title, description, createdTime, categoryID, price, userID, location}){
+    static async addAdvertisement({title, description, createdTime, categoryID, price, userID, location, promoted, views, status}){
         try{
             const newAdvertisement = {
                 title: title,
@@ -10,7 +10,10 @@ module.exports = class AdvertisementService{
                 categoryID: categoryID,
                 price: price,
                 userID: userID,
-                location: location
+                location: location,
+                promoted: promoted,
+                views: views,
+                status: status
             }
 
             return await new Advertisement(newAdvertisement).save();
@@ -32,6 +35,18 @@ module.exports = class AdvertisementService{
             return await Advertisement.findOne({
                 _id: {
                     $eq: id
+                }
+            })
+        }
+        catch(err){
+            console.log(err);
+        }
+    }
+    static async getPromotedAdvertisements(){
+        try{
+            return await Advertisement.find({
+                promoted: {
+                    $eq: true
                 }
             })
         }

@@ -13,11 +13,12 @@ router.post('/login', authController.login)
 router.post('/reset', authController.sendResetMail)
 router.get('/reset/:id', authController.checkResetToken)
 router.post('/reset/:id', authController.changePassword)
-// router.post('/data', authMiddleware, (req, res) => {
+// router.get('/data', authMiddleware, (req, res) => {
 //     res.send('teadwsdsa')
 // })
 router.get('/advertisement', advertisementController.getAllAdvertisements);
 router.get('/advertisement/:id', advertisementController.getAdvertisement);
+router.get('/advertisements/promoted', advertisementController.getPromotedAdvertisements)
 router.get('/category/:id/advertisements', advertisementController.getAdvertisementsByCategory)
 router.post('/advertisement/create', advertisementController.addAdvertisement);
 router.delete('/advertisement/delete/:id', advertisementController.deleteAdvertisement);

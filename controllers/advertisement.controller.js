@@ -46,6 +46,15 @@ module.exports = {
             res.status(500).json({error: err});
         }
     },
+    getPromotedAdvertisements: async(req ,res) => {
+      try{
+          const promotedAdvertisements = await AdvertisementService.getPromotedAdvertisements()
+          return res.json(promotedAdvertisements);
+      }
+      catch(err){
+          res.status(500).json({error: err})
+      }
+    },
     getAdvertisementsByCategory: async(req, res) => {
         try{
             const advertisementsByCategory = await AdvertisementService.getAdvertisementsByCategory(req.params.id)

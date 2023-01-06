@@ -29,6 +29,17 @@ const advertisementSchema = Schema({
     userID: {
         type: String,
         required: true,
+    },
+    promoted: {
+        type: Boolean,
+        required: true,
+    },
+    views: {
+        type: Number,
+    },
+    status: {
+        type: String,
+        required: true
     }
 })
 
