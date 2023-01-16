@@ -6,8 +6,13 @@ const advertisementController = require('../controllers/advertisement.controller
 
 const categoryController = require('../controllers/category.controller');
 
+const conditionController = require('../controllers/condition.controller')
+
+const userController = require('../controllers/user.controller')
+
 const authMiddleware = require('../middleware/authMiddleware');
 
+router.get('/user/:id', userController.getUser)
 router.post('/register', authController.register)
 router.post('/login', authController.login)
 router.post('/reset', authController.sendResetMail)
@@ -33,6 +38,8 @@ router.post('/categories', authMiddleware, (req, res) => {
 })
 
 
-
+router.get('/conditions', conditionController.getAllConditions)
+router.post('/conditions/create', conditionController.createCondition)
+router.get('/condition/:id', conditionController.getCondition)
 
 module.exports = router;

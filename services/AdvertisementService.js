@@ -22,9 +22,27 @@ module.exports = class AdvertisementService{
             console.log(err);
         }
     }
-    static async getAllAdvertisements(){
+    static async getAllAdvertisements(page = 0, limit = 50){
         try{
-            return await Advertisement.find();
+            const advertisements = await Advertisement.find({
+                promoted: {
+                    $ne: true
+                }
+            })
+                .skip(page * limit)
+                .limit(limit)
+            const total = await Advertisement.countDocuments({
+                promoted: {
+                    $ne: true
+                }
+            })
+            return{
+                advertisements,
+                limit,
+                total,
+                page: page + 1,
+                pages: Math.ceil(total / limit)
+            }
         }
         catch(err){
             console.log(err);
@@ -42,13 +60,30 @@ module.exports = class AdvertisementService{
             console.log(err);
         }
     }
-    static async getPromotedAdvertisements(){
+    static async getPromotedAdvertisements(page = 0, limit = 2){
         try{
-            return await Advertisement.find({
+            const advertisements =  await Advertisement.find({
                 promoted: {
                     $eq: true
                 }
             })
+                .skip(page * limit)
+                .limit(limit);
+
+            const total = await Advertisement.countDocuments({
+                promoted: {
+                    $eq: true
+                }
+            });
+
+
+            return {
+                advertisements,
+                limit,
+                total,
+                page: page + 1,
+                pages: Math.ceil(total / limit)
+            }
         }
         catch(err){
             console.log(err);

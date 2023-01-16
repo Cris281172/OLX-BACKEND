@@ -31,8 +31,7 @@ const advertisementSchema = Schema({
         required: true,
     },
     promoted: {
-        type: Boolean,
-        required: true,
+        type: Boolean
     },
     views: {
         type: Number,
