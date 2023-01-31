@@ -22,7 +22,7 @@ module.exports = class AdvertisementService{
             console.log(err);
         }
     }
-    static async getAllAdvertisements(page = 0, limit = 50){
+    static async getNormalAdvertisements(page = 0, limit = 50){
         try{
             const advertisements = await Advertisement.find({
                 promoted: {
@@ -60,7 +60,7 @@ module.exports = class AdvertisementService{
             console.log(err);
         }
     }
-    static async getPromotedAdvertisements(page = 0, limit = 2){
+    static async getPromotedAdvertisements(page = 0, limit = 12){
         try{
             const advertisements =  await Advertisement.find({
                 promoted: {
@@ -76,8 +76,25 @@ module.exports = class AdvertisementService{
                 }
             });
 
-
             return {
+                advertisements,
+                limit,
+                total,
+                page: page + 1,
+                pages: Math.ceil(total / limit)
+            }
+        }
+        catch(err){
+            console.log(err);
+        }
+    }
+    static async getAllAdvertisements(page = 0, limit = 50){
+        try{
+            const advertisements = await Advertisement.find()
+                .skip(page * limit)
+                .limit(limit)
+            const total = await Advertisement.countDocuments()
+            return{
                 advertisements,
                 limit,
                 total,

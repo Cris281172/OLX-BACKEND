@@ -13,7 +13,7 @@ const Advertisement = require('../models/Advertisement')
 //         price: faker.commerce.price(),
 //         userID: 4123421412,
 //         location: faker.address.cityName(),
-//         promoted: true,
+//         promoted: false,
 //         views: 0,
 //         status: 'nowy'
 //     })
@@ -35,10 +35,13 @@ module.exports = {
             const categories = await CategoryService.getAllCategories()
             let advertisements = []
             if(req.query.type === 'normal'){
-                advertisements = await AdvertisementService.getAllAdvertisements(req.body);
+                advertisements = await AdvertisementService.getNormalAdvertisements(req.body);
             }
             else if(req.query.type === 'promoted'){
                 advertisements = await AdvertisementService.getPromotedAdvertisements(req.body)
+            }
+            else if(req.query.type === 'all'){
+                advertisements = await AdvertisementService.getAllAdvertisements(req.body);
             }
             advertisements.advertisements = advertisements.advertisements.map(el => {
                 const category = categories.find(category => category.id === el.categoryID);
